@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 
 public class User {
@@ -20,11 +19,7 @@ public class User {
 	}
 	
 	public boolean addAppointment(Appointment app){
-		if(appointments.add(app))
-			return true;
-		
-		return false;
-		
+		return appointments.add(app);
 	}
 	
 	public void printApps(){
@@ -33,7 +28,6 @@ public class User {
 	}
 
 	public HashSet<Appointment> reduceToSuitableSlots(HashSet<Appointment> apps) {
-		//sortApps();
 		HashSet<Appointment> iterator = new HashSet<Appointment>(apps);
 		
 		for(Appointment a : iterator){
