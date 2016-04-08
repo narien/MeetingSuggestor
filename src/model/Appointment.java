@@ -1,8 +1,9 @@
 package model;
 
+import java.util.Comparator;
 import java.util.Date;
 
-public class Appointment{
+public class Appointment implements Comparable<Appointment>{
 	private Date start;
 	private Date finish;
 	
@@ -23,15 +24,15 @@ public class Appointment{
 		return start.toString() + " to " + finish.toString();
 	}
 
-/**	@Override
-	public int compareTo(Appointment o) {
-		return start.compareTo(o.start);
-	}**/
-
 	public boolean collideWith(Appointment b) {
 		if (start.compareTo(b.finish) < 0  && finish.compareTo(b.start) > 0){
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Appointment o) {
+		return start.compareTo(o.start);
 	}
 }
