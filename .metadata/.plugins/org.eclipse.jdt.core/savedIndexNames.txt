@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+/Users/jakobsvemar/Documents/MeetingSuggestor/.metadata/.plugins/org.eclipse.jdt.core
