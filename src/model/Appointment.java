@@ -6,7 +6,7 @@ public class Appointment implements Comparable<Appointment>{
 	private Date start;
 	private Date finish;
 	
-	public Appointment(Date start, Date finish, String id){
+	public Appointment(Date start, Date finish){
 		this.start = start;
 		this.finish = finish;
 	}
@@ -18,9 +18,13 @@ public class Appointment implements Comparable<Appointment>{
 	public Date getFinishDate(){
 		return finish;
 	}
+	
+	public String toString(){
+		return start.toString() + " to " + finish.toString();
+	}
 
 	@Override
 	public int compareTo(Appointment o) {
-		return start.toString().compareTo(o.getStartDate().toString());
+		return start.compareTo(o.start);
 	}
 }

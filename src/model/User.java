@@ -1,22 +1,36 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class User {
-	private String id;
 	private String name;
+	private ArrayList<Appointment> appointments;
 	
-	public User (String id, String name){
-		this.id = id;
+	public User (String name){
 		this.name = name;
-	}
-
-	public String getId(){
-		return id;
+		appointments = new ArrayList<Appointment>();
 	}
 	
 	public String getName(){
 		return name;
+	}
+	
+	public boolean addAppointment(Appointment app){
+		if(appointments.add(app))
+			return true;
+		
+		return false;
+		
+	}
+	
+	public void sortApps(){
+		Collections.sort(appointments);
+	}
+	
+	public void printApps(){
+				for(Appointment a : appointments)
+			System.out.println(a.toString());
 	}
 
 }
