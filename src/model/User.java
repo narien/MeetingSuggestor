@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class User {
 	private String id;
@@ -26,13 +27,22 @@ public class User {
 		
 	}
 	
-	public void sortApps(){
-		Collections.sort(appointments);
-	}
-	
 	public void printApps(){
 				for(Appointment a : appointments)
 			System.out.println(a.toString());
 	}
 
+	public HashSet<Appointment> reduceToSuitableSlots(HashSet<Appointment> apps) {
+		//sortApps();
+		HashSet<Appointment> iterator = new HashSet<Appointment>(apps);
+		
+		for(Appointment a : iterator){
+			for(Appointment b : appointments){
+				if (apps.contains(a) && a.collideWith(b)){
+					apps.remove(a);
+				}
+			}
+		}
+		return apps;
+	}
 }
