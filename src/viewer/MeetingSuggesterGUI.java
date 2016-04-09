@@ -61,7 +61,7 @@ public class MeetingSuggesterGUI {
 		lblMeetingInterval.setBounds(6, 12, 101, 16);
 		frame.getContentPane().add(lblMeetingInterval);
 		
-		txtfIntervalStart = new JTextField("M/d/yy h:mm:ss AM/PM");
+		txtfIntervalStart = new JTextField("M/d/yyyy h:m:s AM/PM");
 		txtfIntervalStart.setBounds(148, 6, 215, 28);
 		frame.getContentPane().add(txtfIntervalStart);
 		txtfIntervalStart.setColumns(10);
@@ -70,16 +70,16 @@ public class MeetingSuggesterGUI {
 		label.setBounds(365, 12, 10, 16);
 		frame.getContentPane().add(label);
 		
-		txtfIntervalFinish = new JTextField("M/d/yy h:mm:ss AM/PM");
+		txtfIntervalFinish = new JTextField("M/d/yyyy h:m:s AM/PM");
 		txtfIntervalFinish.setBounds(375, 6, 215, 28);
 		frame.getContentPane().add(txtfIntervalFinish);
 		txtfIntervalFinish.setColumns(10);
 		
-		JLabel lblMeetingDuration = new JLabel("Meeting duration");
+		JLabel lblMeetingDuration = new JLabel("Duration (min)");
 		lblMeetingDuration.setBounds(6, 45, 130, 16);
 		frame.getContentPane().add(lblMeetingDuration);
 		
-		txtfDuration = new JTextField("minutes");
+		txtfDuration = new JTextField("30");
 		txtfDuration.setBounds(148, 39, 134, 28);
 		frame.getContentPane().add(txtfDuration);
 		txtfDuration.setColumns(10);
@@ -122,13 +122,13 @@ public class MeetingSuggesterGUI {
 		try {
 			initial = sdf.parse(txtfIntervalStart.getText());
 		} catch (ParseException e) {
-			infoBox("Incorrect interval start, please use format: M/d/yy h:mm:ss AM/PM", "Interval Error");
+			infoBox("Incorrect interval start, please use format: M/d/yyyy h:m:s AM/PM\n Ex: 3/13/2015 8:00:00 AM", "Interval Error");
 			return;
 		}
 		try {
 			finite = sdf.parse(txtfIntervalFinish.getText());
 		} catch (ParseException e) {
-			infoBox("Incorrect interval end, please use format: M/d/yy h:mm:ss AM/PM", "Interval Error");
+			infoBox("Incorrect interval end, please use format: M/d/yyyy h:m:s AM/PM\n Ex: 3/13/2015 5:00:00 PM", "Interval Error");
 			return;
 		}
 		try {
