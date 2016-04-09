@@ -16,31 +16,44 @@ public class AppointmentFinder {
 		apps = new HashSet<Appointment>();
 		Calendar cal = Calendar.getInstance();
 		
-		while(!intervalFirst.equals(intervalLast)){
+		cal.setTime(intervalFirst); 
+		intervalFirst = normalizeMeetingStart(cal); //Making sure meetings start on every half hour without bothering the user
+		
+		while(intervalFirst.compareTo(intervalLast) <= 0){
 			cal.setTime(intervalFirst);
 			cal.add(Calendar.MINUTE, length);
+			
+			boolean meetingEndGood = false; //Making sure meetings do not go past 17.00
+			if(cal.get(Calendar.HOUR_OF_DAY) < 17 || (cal.get(Calendar.HOUR_OF_DAY) == 17 && cal.get(Calendar.MINUTE) == 0)){
+				meetingEndGood = true;
+			}
+			
 			Date temp = cal.getTime();
+			
 			cal.setTime(intervalFirst); //resetting it for use in if statement as well as be ready to increment 30 min
 			
-			if(cal.get(Calendar.HOUR_OF_DAY) > 7 && cal.get(Calendar.HOUR_OF_DAY) < 17)
+			if(cal.get(Calendar.HOUR_OF_DAY) > 7 && cal.get(Calendar.HOUR_OF_DAY) < 17 && meetingEndGood){
 				apps.add(new Appointment(intervalFirst, temp));
-				
-			//cal.setTime(intervalFirst);
+			}	
 			cal.add(Calendar.MINUTE, 30);
 			intervalFirst = cal.getTime();
 		}
 		
 		for(String s : participants){
-			findSlotsForUser(s, udb);
+			apps = udb.get(s).reduceToSuitableSlots(apps);
 		}
 	}
-	
-	private void findSlotsForUser(String id, UserDatabase udb){
-		apps = udb.get(id).reduceToSuitableSlots(apps);
-	}
-	
-	public HashSet<Appointment> getSet(){
-		return apps;
+
+	private Date normalizeMeetingStart(Calendar cal) {
+		Date intervalFirst;
+		if(cal.get(Calendar.MINUTE) > 0 && cal.get(Calendar.MINUTE) < 30){
+			cal.set(Calendar.MINUTE, 30);
+		} else if (cal.get(Calendar.MINUTE) > 30){
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.HOUR, cal.get(Calendar.HOUR)+1);
+		}
+		intervalFirst = cal.getTime();
+		return intervalFirst;
 	}
 	
 	public DefaultListModel<Appointment> toListModel() {
@@ -58,6 +71,5 @@ public class AppointmentFinder {
 			appModel.addElement(new Appointment(null, null));
 		
 		return appModel;
-
 	}
 }

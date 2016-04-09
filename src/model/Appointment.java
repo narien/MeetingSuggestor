@@ -11,14 +11,6 @@ public class Appointment implements Comparable<Appointment>{
 		this.finish = finish;
 	}
 	
-	public Date getStartDate(){
-		return start;
-	}
-	
-	public Date getFinishDate(){
-		return finish;
-	}
-	
 	public String toString(){
 		if(start == null || finish == null)
 			return "No available appointment";

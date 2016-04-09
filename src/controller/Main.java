@@ -9,14 +9,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
 
 import viewer.MeetingSuggesterGUI;
 import model.Appointment;
-import model.AppointmentFinder;
 import model.User;
 import model.UserDatabase;
 
@@ -43,7 +40,7 @@ public class Main {
 	public static void initilizeDB(){
 		ArrayList<String[]> appointments = new ArrayList<String[]>();
 
-		//Adds the users to database, saves appointments for later, freebusy hard coded
+		//Adds the users to database, saves appointments for later, freebusy hard coded for ease of use.
 		try{
 			BufferedReader reader = new BufferedReader(new FileReader(new File("freebusy.txt")));
 			String s = reader.readLine();
@@ -89,24 +86,3 @@ public class Main {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,10 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 public class UserDatabase extends HashMap<String, User>{
 

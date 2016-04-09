@@ -14,10 +14,6 @@ public class User {
 		appointments = new ArrayList<Appointment>();
 	}
 	
-	public String getName(){
-		return name;
-	}
-	
 	public boolean addAppointment(Appointment app){
 		return appointments.add(app);
 	}

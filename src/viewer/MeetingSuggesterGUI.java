@@ -1,30 +1,22 @@
 package viewer;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 
 import model.Appointment;
@@ -41,7 +33,7 @@ public class MeetingSuggesterGUI {
 	private JList<User> jUserList;
 	private JList<Appointment> results;
 	
-	private static UserDatabase udb;
+	private UserDatabase udb;
 
 	/**
 	 * Create the gui.
@@ -111,7 +103,7 @@ public class MeetingSuggesterGUI {
 		
 		
 		/**
-		 * Will wait for button click
+		 * Will respond on button click
 		 */
 		btnSuggestTime.addActionListener(new ActionListener() {
 		      @Override
