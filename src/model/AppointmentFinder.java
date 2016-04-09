@@ -46,6 +46,7 @@ public class AppointmentFinder {
 
 	private Date normalizeMeetingStart(Calendar cal) {
 		Date intervalFirst;
+		cal.set(Calendar.SECOND, 0);	//Let's ignore seconds?
 		if(cal.get(Calendar.MINUTE) > 0 && cal.get(Calendar.MINUTE) < 30){
 			cal.set(Calendar.MINUTE, 30);
 		} else if (cal.get(Calendar.MINUTE) > 30){
