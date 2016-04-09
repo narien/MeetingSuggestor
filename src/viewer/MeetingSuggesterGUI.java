@@ -115,11 +115,9 @@ public class MeetingSuggesterGUI {
 
 	private void findSlots(){
 		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss aa", Locale.US);
-		Date initial;
-		Date finite;
+		Date initial; 		//initial = new Date("3/13/2015 8:00:00 AM");
+		Date finite;		//finite = new Date("3/13/2015 5:00:00 PM");
 		int duration;
-		//initial = new Date("3/13/2015 8:00:00 AM");
-		//finite = new Date("3/13/2015 5:00:00 PM");
 
 		try {
 			initial = sdf.parse(txtfIntervalStart.getText());
@@ -156,8 +154,7 @@ public class MeetingSuggesterGUI {
 			return;
 		}
 		
-		AppointmentFinder af = new AppointmentFinder(initial, finite, duration, participants, udb);
-		results.setModel(af.toListModel());
+		results.setModel(new AppointmentFinder(initial, finite, duration, participants, udb).toListModel());
 	}
 	
 	public static void infoBox(String infoMessage, String titleBar)
