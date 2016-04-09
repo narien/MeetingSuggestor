@@ -38,35 +38,14 @@ public class Main {
 				}
 			}
 		});		
-		
-	/**	
-		
-		//test data
-		Date initial = new Date("3/13/2015 8:00:00 AM");
-		Date finite = new Date("3/13/2015 5:00:00 PM");
-		int duration = 30;
-		HashSet<String> participants = new HashSet<String>();
-		participants.add("57646786307395936680161735716561753784");
-		participants.add("57646786307395936680161735716561753785");
-
-		
-		AppointmentFinder af = new AppointmentFinder(initial, finite, duration, participants, udb);
-		
-		//test code
-		ArrayList<Appointment> afList = new ArrayList<Appointment>();
-		for(Appointment a : af.getSet())
-			afList.add(a);
-		Collections.sort(afList);
-		for(Appointment a : afList)
-			System.out.println(a.toString());**/
 	}
 
 	public static void initilizeDB(){
 		ArrayList<String[]> appointments = new ArrayList<String[]>();
 
-		//Adds the users to database, saves appointments for later
+		//Adds the users to database, saves appointments for later, freebusy hard coded
 		try{
-			BufferedReader reader = new BufferedReader(new FileReader(new File("freebusytest.txt")));
+			BufferedReader reader = new BufferedReader(new FileReader(new File("freebusy.txt")));
 			String s = reader.readLine();
 			while(s != null){
 				String[]elements = s.split(";");
@@ -90,22 +69,24 @@ public class Main {
 		//Input the appointments for each user
 		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss aa", Locale.US);
 		for(String[] s : appointments){
-			Date start = null;
-			Date finish = null;
-			Appointment app = null;
-			try {
-				start = sdf.parse(s[1]);
-				finish = sdf.parse(s[2]);
-				app = new Appointment(start, finish);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			}
-			if(app != null){
-				udb.get(s[0]).addAppointment(app);
-			}
+			parseAppointment(sdf, s);
 		}
-		//udb.get("57646786307395936680161735716561753784").printApps();
+	}
+
+	private static void parseAppointment(SimpleDateFormat sdf, String[] s) {
+		Date start = null;
+		Date finish = null;
+		Appointment app = null;
+		try {
+			start = sdf.parse(s[1]);
+			finish = sdf.parse(s[2]);
+			app = new Appointment(start, finish);
+		} catch (ParseException e) {
+			return;
+		}
+		if(app != null){
+			udb.get(s[0]).addAppointment(app);
+		}
 	}
 }
 

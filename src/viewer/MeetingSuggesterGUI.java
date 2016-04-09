@@ -129,6 +129,8 @@ public class MeetingSuggesterGUI {
 		Date initial;
 		Date finite;
 		int duration;
+		//initial = new Date("3/13/2015 8:00:00 AM");
+		//finite = new Date("3/13/2015 5:00:00 PM");
 
 		try {
 			initial = sdf.parse(txtfIntervalStart.getText());
