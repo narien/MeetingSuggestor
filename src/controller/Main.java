@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 
+import viewer.MeetingSuggesterGUI;
 import model.Appointment;
 import model.AppointmentFinder;
 import model.User;
@@ -20,10 +22,24 @@ import model.UserDatabase;
 
 public class Main {
 	private static UserDatabase udb;
+	private static MeetingSuggesterGUI window;
 	
 	public static void main(String args[]){
 		udb = new UserDatabase();
 		initilizeDB();
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					window = new MeetingSuggesterGUI(udb);
+					window.visible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});		
+		
+	/**	
 		
 		//test data
 		Date initial = new Date("3/13/2015 8:00:00 AM");
@@ -42,7 +58,7 @@ public class Main {
 			afList.add(a);
 		Collections.sort(afList);
 		for(Appointment a : afList)
-			System.out.println(a.toString());
+			System.out.println(a.toString());**/
 	}
 
 	public static void initilizeDB(){

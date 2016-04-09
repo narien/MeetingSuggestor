@@ -39,4 +39,12 @@ public class User {
 		}
 		return apps;
 	}
+	
+	public String toString(){
+		return name + "\n" + id;
+	}
+
+	public String getId() {
+		return id;
+	}
 }

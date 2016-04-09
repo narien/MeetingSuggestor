@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Comparator;
 import java.util.Date;
 
 public class Appointment implements Comparable<Appointment>{
@@ -21,7 +20,10 @@ public class Appointment implements Comparable<Appointment>{
 	}
 	
 	public String toString(){
-		return start.toString() + " to " + finish.toString();
+		if(start == null || finish == null)
+			return "No available appointment";
+		
+		return start.toString();
 	}
 
 	public boolean collideWith(Appointment b) {
