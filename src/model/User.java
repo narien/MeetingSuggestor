@@ -30,7 +30,7 @@ public class User {
 	public HashSet<Appointment> reduceToSuitableSlots(HashSet<Appointment> apps) {
 		HashSet<Appointment> iterator = new HashSet<Appointment>(apps);
 		
-		for(Appointment a : iterator){
+		for(Appointment a : iterator){ //Should be inefficient, could be better to step through like a merge sort algorithm?
 			for(Appointment b : appointments){
 				if (apps.contains(a) && a.collideWith(b)){
 					apps.remove(a);

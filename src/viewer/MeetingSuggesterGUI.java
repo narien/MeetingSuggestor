@@ -65,11 +65,11 @@ public class MeetingSuggesterGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblMeetingInterval = new JLabel("Meeting interval");
+		JLabel lblMeetingInterval = new JLabel("Start Interval");
 		lblMeetingInterval.setBounds(6, 12, 101, 16);
 		frame.getContentPane().add(lblMeetingInterval);
 		
-		txtfIntervalStart = new JTextField("dd/mm/yyyy hh:mm:ss AM/PM");
+		txtfIntervalStart = new JTextField("M/d/yy h:mm:ss AM/PM");
 		txtfIntervalStart.setBounds(148, 6, 215, 28);
 		frame.getContentPane().add(txtfIntervalStart);
 		txtfIntervalStart.setColumns(10);
@@ -78,7 +78,7 @@ public class MeetingSuggesterGUI {
 		label.setBounds(365, 12, 10, 16);
 		frame.getContentPane().add(label);
 		
-		txtfIntervalFinish = new JTextField("dd/mm/yyyy hh:mm:ss AM/PM");
+		txtfIntervalFinish = new JTextField("M/d/yy h:mm:ss AM/PM");
 		txtfIntervalFinish.setBounds(375, 6, 215, 28);
 		frame.getContentPane().add(txtfIntervalFinish);
 		txtfIntervalFinish.setColumns(10);
@@ -119,9 +119,6 @@ public class MeetingSuggesterGUI {
 		           findSlots();
 		      }
 		});
-		
-
-		
 	}
 
 	private void findSlots(){
@@ -144,12 +141,15 @@ public class MeetingSuggesterGUI {
 			infoBox("Incorrect interval end, please use format: M/d/yy h:mm:ss AM/PM", "Interval Error");
 			return;
 		}
-		
 		try {
 			duration = Integer.parseInt(txtfDuration.getText());
 
 		} catch (java.lang.NumberFormatException e) {
 			infoBox("Incorrect duration format, please enter the amount\n of minutes the meeting should be scheduled for.", "Duration error");
+			return;
+		}
+		if(initial.compareTo(finite) > 0){
+			infoBox("Incorrect Interval selection, please enter a functional interval.", "Interval error");
 			return;
 		}
 		

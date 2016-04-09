@@ -15,15 +15,17 @@ public class AppointmentFinder {
 			HashSet<String> participants, UserDatabase udb){
 		apps = new HashSet<Appointment>();
 		Calendar cal = Calendar.getInstance();
-
+		
 		while(!intervalFirst.equals(intervalLast)){
 			cal.setTime(intervalFirst);
 			cal.add(Calendar.MINUTE, length);
 			Date temp = cal.getTime();
+			cal.setTime(intervalFirst); //resetting it for use in if statement as well as be ready to increment 30 min
 			
-			apps.add(new Appointment(intervalFirst, temp));
-			
-			cal.setTime(intervalFirst);
+			if(cal.get(Calendar.HOUR_OF_DAY) > 7 && cal.get(Calendar.HOUR_OF_DAY) < 17)
+				apps.add(new Appointment(intervalFirst, temp));
+				
+			//cal.setTime(intervalFirst);
 			cal.add(Calendar.MINUTE, 30);
 			intervalFirst = cal.getTime();
 		}
